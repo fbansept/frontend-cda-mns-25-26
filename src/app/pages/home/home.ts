@@ -1,10 +1,5 @@
 import { HttpClient } from '@angular/common/http';
-import { Component, inject, OnInit } from '@angular/core';
-
-type AppComponent = {
-  id: number,
-  name: string,
-}
+import { Component, inject, OnInit, signal } from '@angular/core';
 
 @Component({
   selector: 'app-home',
@@ -13,24 +8,19 @@ type AppComponent = {
   styleUrl: './home.scss',
 })
 export class Home implements OnInit {
+  components = signal<Composant[]>([]);
 
-  components = []
-
-  httpClient = inject(HttpClient)
+  httpClient = inject(HttpClient);
 
   ngOnInit() {
-
     console.log('debut');
 
-    this.httpClient.get<string>('http://localhost:8080/component/list')
+    this.httpClient
+      .get<Composant[]>('http://localhost:8080/component/list')
       .subscribe((listComponents) => {
+        this.components.set(listComponents);
+      });
 
-        this.components = listComponents;
-
-      })
-
-    console.log("fin");
+    console.log('fin');
   }
-
-
 }
