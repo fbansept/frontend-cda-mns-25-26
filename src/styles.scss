@@ -37,3 +37,36 @@ body {
   height: 100%;
 }
 /* You can add global styles to this file, and also import other style files */
+
+.mdc-snackbar {
+  &.valid .mat-mdc-snackbar-surface {
+    background-color: rgb(14, 183, 14);
+  }
+
+  &.info .mat-mdc-snackbar-surface {
+    background-color: rgb(59, 69, 209);
+  }
+
+  &.warning .mat-mdc-snackbar-surface {
+    background-color: rgb(241, 159, 7);
+  }
+
+  &.error .mat-mdc-snackbar-surface {
+    background-color: rgb(204, 24, 24);
+  }
+}
+
+.formulaire {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  min-width: 300px;
+  max-width: 1000px;
+  width: 100%;
+  margin: 1em;
+
+  .mdc-button {
+    width: fit-content;
+    min-width: 200px;
+  }
+}

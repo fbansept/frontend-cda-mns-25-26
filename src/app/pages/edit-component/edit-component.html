@@ -1,4 +1,4 @@
-<form [formGroup]="formulaire" (ngSubmit)="onCreation()">
+<form class="formulaire" [formGroup]="formulaire" (ngSubmit)="onCreation()">
   <mat-form-field>
     <mat-label>Nom</mat-label>
     <input matInput placeholder="Ex. Ecran" formControlName="name" />
@@ -43,5 +43,8 @@
     </mat-select>
   </mat-form-field>
 
-  <button matButton="elevated">Créer</button>
+  <div class="d-flex">
+    <button type="submit" matButton="elevated">Créer</button>
+    <button type="button" matButton="elevated" routerLink="/">Annuler</button>
+  </div>
 </form>
