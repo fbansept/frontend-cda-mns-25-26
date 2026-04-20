@@ -35,7 +35,7 @@
 
   <mat-form-field>
     <mat-label>Emprunté par</mat-label>
-    <mat-select formControlName="loaner" [compareWith]="(a,b) => a.id === b.id">
+    <mat-select formControlName="loaner" [compareWith]="(a, b) => a.id === b.id">
       <mat-option [value]="null">personne</mat-option>
       @for (user of listUser(); track user.id) {
         <mat-option [value]="user">{{ user.pseudo }}</mat-option>
@@ -43,8 +43,19 @@
     </mat-select>
   </mat-form-field>
 
+  <mat-form-field>
+    <mat-label>Tags</mat-label>
+    <mat-select formControlName="tags" [compareWith]="(a, b) => a.id === b.id" multiple>
+      @for (tag of listTags(); track tag.id) {
+        <mat-option [value]="tag">{{ tag.name }}</mat-option>
+      }
+    </mat-select>
+  </mat-form-field>
+
   <div class="d-flex">
-    <button type="submit" matButton="elevated">Créer</button>
+    <button type="submit" matButton="elevated">
+      {{ componentEdited() ? 'Modifier' : 'Créer' }}
+    </button>
     <button type="button" matButton="elevated" routerLink="/">Annuler</button>
   </div>
 </form>
