@@ -33,4 +33,10 @@ export class ComposantService {
       .put('http://localhost:8080/component/' + id, composant)
       .pipe(tap((resultat) => this.getAll().subscribe()));
   }
+
+  delete(id: number) {
+    return this.httpClient
+      .delete('http://localhost:8080/component/' + id)
+      .pipe(tap((resultat) => this.getAll().subscribe()));
+  }
 }
