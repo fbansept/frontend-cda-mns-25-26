@@ -1,0 +1,47 @@
+<form [formGroup]="formulaire" (ngSubmit)="onCreation()">
+  <mat-form-field>
+    <mat-label>Nom</mat-label>
+    <input matInput placeholder="Ex. Ecran" formControlName="name" />
+
+    @if (formulaire.get('name')?.hasError('required')) {
+      <mat-error>Le nom est obligatoire</mat-error>
+    } @else if (formulaire.get('name')?.hasError('minlength')) {
+      <mat-error>Le nom doit avoir au moins 3 caractères</mat-error>
+    } @else {
+      <mat-error>Le nom ne peut avoir que 20 caractères au maximum</mat-error>
+    }
+  </mat-form-field>
+
+  <mat-form-field>
+    <mat-label>Numero de serie</mat-label>
+    <input matInput placeholder="Ex. 0123456789" formControlName="serialNumber" />
+
+    @if (formulaire.get('serialNumber')?.hasError('required')) {
+      <mat-error>Le numero de série est obligatoire</mat-error>
+    } @else {
+      <mat-error>Le numero de série à 10 caractères</mat-error>
+    }
+  </mat-form-field>
+
+  <mat-form-field>
+    <mat-label>Description</mat-label>
+    <textarea
+      matInput
+      formControlName="description"
+      placeholder="Ex. Ecran 33'' de diagonale"
+    ></textarea>
+    <mat-error>La description ne peut pas dépasser 100 caractères</mat-error>
+  </mat-form-field>
+
+  <mat-form-field>
+    <mat-label>Emprunté par</mat-label>
+    <mat-select formControlName="loaner">
+      <mat-option [value]="null">personne</mat-option>
+      @for (user of listUser(); track user.id) {
+        <mat-option [value]="user">{{ user.pseudo }}</mat-option>
+      }
+    </mat-select>
+  </mat-form-field>
+
+  <button matButton="elevated">Créer</button>
+</form>
