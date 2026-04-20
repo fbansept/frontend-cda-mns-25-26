@@ -35,7 +35,7 @@
 
   <mat-form-field>
     <mat-label>Emprunté par</mat-label>
-    <mat-select formControlName="loaner">
+    <mat-select formControlName="loaner" [compareWith]="(a,b) => a.id === b.id">
       <mat-option [value]="null">personne</mat-option>
       @for (user of listUser(); track user.id) {
         <mat-option [value]="user">{{ user.pseudo }}</mat-option>

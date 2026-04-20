@@ -33,7 +33,7 @@ export class EditComponent implements OnInit {
     name: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(20)]],
     description: ['', [Validators.maxLength(100)]],
     serialNumber: ['', [Validators.required, Validators.minLength(10), Validators.maxLength(10)]],
-    loaner: [null],
+    loaner: [null as AppUser | null],
   });
 
   ngOnInit() {
@@ -55,7 +55,15 @@ export class EditComponent implements OnInit {
           // et les injecter dans le formulaire
           this.httpClient
             .get<Composant>('http://localhost:8080/component/' + id)
-            .subscribe((component) => this.formulaire.patchValue(component));
+            .subscribe((component) => {
+              this.formulaire.patchValue(component)
+
+              this.formulaire.get('loaner')?.setValue(component.loaner, { emitEvent: false })
+
+            });
+
+
+
         }
       }
     });
