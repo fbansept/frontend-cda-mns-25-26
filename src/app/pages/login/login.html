@@ -1,1 +1,22 @@
-<p>login works!</p>
+<form class="formulaire" [formGroup]="formulaire" (ngSubmit)="onLogin()">
+  <mat-form-field>
+    <mat-label>Email</mat-label>
+    <input matInput placeholder="Ex. john.doe@gmail.com" formControlName="email" />
+
+    @if (formulaire.get('email')?.hasError('email')) {
+      <mat-error>Doit être une adresse email</mat-error>
+    } @else {
+      <mat-error>Le champs est obligatoire</mat-error>
+    }
+  </mat-form-field>
+
+  <mat-form-field>
+    <mat-label>Mot de passe</mat-label>
+    <input matInput formControlName="password" type="password" />
+    <mat-error>Le champs est obligatoire</mat-error>
+  </mat-form-field>
+
+  <button mat-raised-button type="submit">
+    Se connecter
+  </button>
+</form>

@@ -1,14 +1,5 @@
-
 <h1>Liste composants</h1>
 
 @for (component of components(); track component.id) {
-
-    <div>{{ component.name }}</div>
-
-    @for (tag of component.tags; track tag.id) {
-
-        <div>{{ tag.name }}</div>
-
-    }
-
+  <div>{{ component.name }}</div>
 }

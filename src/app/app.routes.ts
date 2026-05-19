@@ -4,9 +4,10 @@ import { Login } from './pages/login/login';
 import { Page404 } from './pages/page404/page404';
 import { DetailComponent } from './pages/detail-component/detail-component';
 import { EditComponent } from './pages/edit-component/edit-component';
+import { userGuard } from './guards/user-guard';
 
 export const routes: Routes = [
-  { path: 'home', component: Home },
+  { path: 'home', component: Home, canActivate: [userGuard] },
   { path: 'login', component: Login },
   { path: 'component/create', component: EditComponent },
   { path: 'component/update/:id', component: EditComponent },
