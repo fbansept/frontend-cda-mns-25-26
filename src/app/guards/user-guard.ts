@@ -1,10 +1,18 @@
 import { inject } from '@angular/core';
 import { CanActivateFn, Router } from '@angular/router';
+import { AuthService } from '../services/auth';
 
 export const userGuard: CanActivateFn = (route, state) => {
-  //si l'utisateur n'est pas connecté (pas de jwt dans le localStorage) alors on le redirige vers la page de login
-  if (localStorage.getItem('jwt') == null) {
+  const authService = inject(AuthService);
+
+  //si l'utisateur n'est pas connecté
+  if (
+    authService.jwtInfo()?.role != 'USER' &&
+    authService.jwtInfo()?.role != 'SUPPLIER' &&
+    authService.jwtInfo()?.role != 'ADMIN'
+  ) {
     const router = inject(Router);
+
     return router.parseUrl('/login');
   }
 

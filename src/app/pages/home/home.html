@@ -1,5 +1,14 @@
 <h1>Liste composants</h1>
 
+@if (authService.jwtInfo()?.role === 'ADMIN' 
+    || authService.jwtInfo()?.role === 'SUPPLIER  ') {
+  <button 
+    mat-raised-button 
+    routerLink="/component/create">
+      Ajouter un composant
+  </button>
+}
+
 @for (component of components(); track component.id) {
   <div>{{ component.name }}</div>
 }

@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Component, inject, signal } from '@angular/core';
 import { RouterOutlet, RouterLink, RouterLinkActive } from '@angular/router';
 import { ComposantService } from './services/composant';
+import { AuthService } from './services/auth';
 
 @Component({
   selector: 'app-root',
@@ -10,13 +11,11 @@ import { ComposantService } from './services/composant';
   styleUrl: './app.scss',
 })
 export class App {
+  authService = inject(AuthService);
 
-  composantService = inject(ComposantService)
+  ngOnInit() {}
 
-  ngOnInit() {
-    this.composantService
-      .getAll()
-      .subscribe(composantList => console.log("coucou !!!! "));
+  logout() {
+    this.authService.jwtInfo.set(null);
   }
-  
 }
