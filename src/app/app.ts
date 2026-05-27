@@ -1,7 +1,5 @@
-import { HttpClient } from '@angular/common/http';
-import { Component, inject, signal } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { RouterOutlet, RouterLink, RouterLinkActive } from '@angular/router';
-import { ComposantService } from './services/composant';
 import { AuthService } from './services/auth';
 
 @Component({
@@ -13,9 +11,8 @@ import { AuthService } from './services/auth';
 export class App {
   authService = inject(AuthService);
 
-  ngOnInit() {}
-
   logout() {
-    this.authService.jwtInfo.set(null);
+    this.authService.logout();
+
   }
 }

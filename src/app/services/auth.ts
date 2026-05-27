@@ -16,6 +16,11 @@ export class AuthService {
   constructor() {
     this.decodeJwt();
   }
+  
+  logout() {
+    localStorage.removeItem('jwt');
+    this.jwtInfo.set(null);
+  }
 
   login(credentials: { email: string; password: string }) {
     return this.httpClient
