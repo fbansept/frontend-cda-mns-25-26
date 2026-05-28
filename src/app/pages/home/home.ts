@@ -3,6 +3,7 @@ import { Component, inject, OnInit, signal } from '@angular/core';
 import { AuthService } from '../../services/auth';
 import { MatButtonModule } from '@angular/material/button';
 import { RouterLink } from '@angular/router';
+import { environment } from '../../../environments/environment.development';
 
 @Component({
   selector: 'app-home',
@@ -23,7 +24,7 @@ export class Home implements OnInit {
     console.log('debut');
 
     this.httpClient
-      .get<Composant[]>('http://localhost:8080/component/list')
+      .get<Composant[]>(`${environment.serverUrl}/component/list`)
       .subscribe((listComponents) => {
         this.components.set(listComponents);
       });

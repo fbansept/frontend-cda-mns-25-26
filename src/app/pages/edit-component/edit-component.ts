@@ -8,6 +8,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { NotificationService } from '../../services/notification';
 import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { ComposantService } from '../../services/composant';
+import { environment } from '../../../environments/environment.development';
 
 @Component({
   selector: 'app-edit-component',
@@ -45,12 +46,12 @@ export class EditComponent implements OnInit {
   ngOnInit() {
     // récupérer la liste des utilisateurs pour le select du formulaire
     this.httpClient
-      .get<AppUser[]>('http://localhost:8080/user/list')
+      .get<AppUser[]>(`${environment.serverUrl}/user/list`)
       .subscribe((listUser) => this.listUser.set(listUser));
 
     // récupérer la liste des tags pour le multiselect du formulaire
     this.httpClient
-      .get<Tag[]>('http://localhost:8080/tag/list')
+      .get<Tag[]>(`${environment.serverUrl}/tag/list`)
       .subscribe((listTags) => this.listTags.set(listTags));
 
     // vérifier si on est en création ou en modification et recuperer l'id

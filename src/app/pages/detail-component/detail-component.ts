@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, inject, OnInit, signal } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { environment } from '../../../environments/environment.development';
 
 @Component({
   selector: 'app-detail-component',
@@ -21,7 +22,7 @@ export class DetailComponent implements OnInit {
         alert('ID non valide'); // peut etre remplacer par un message, ou une redirection vers une page 404
       } else {
         this.httpClient
-          .get<Composant>('http://localhost:8080/component/' + id)
+          .get<Composant>(`${environment.serverUrl}/component/${id}`)
           .subscribe((component) => this.component.set(component));
       }
     });
